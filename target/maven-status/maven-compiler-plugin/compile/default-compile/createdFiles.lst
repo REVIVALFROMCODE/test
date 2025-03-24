@@ -1,0 +1,11 @@
+com\yingjia\api\response\LoginResponse.class
+com\yingjia\api\repo\UserRepository.class
+com\yingjia\api\service\UserService.class
+com\yingjia\api\config\CustomConfig.class
+com\yingjia\api\service\HttpService.class
+com\yingjia\api\config\PayConfig.class
+com\yingjia\api\service\PersistentService.class
+com\yingjia\api\config\HttpClientConfig.class
+com\yingjia\api\controller\wxController.class
+com\yingjia\api\ApiApplication.class
+com\yingjia\api\entity\User.class
