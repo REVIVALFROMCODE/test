@@ -3,3 +3,8 @@ mvn package
 docker build -t app .
 
 docker compose up
+
+
+docker exec -it 8df4dbd8197d cat /var/logs/unmatched_requests.log
+
+keytool -list -v -keystore ./dreamgiven.cn.jks -storepass vyj0c9v5x6pe 

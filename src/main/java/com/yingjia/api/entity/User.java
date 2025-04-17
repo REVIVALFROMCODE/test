@@ -7,25 +7,24 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
-/**
- * Represents a user in the system.
- * <p>
- * CREATE TABLE `User` (
- * `UserId` VARCHAR(50) PRIMARY KEY,
- * `NickName` VARCHAR(50) NOT NULL,
- * `PhoneNumber` VARCHAR(20) UNIQUE,
- * `Gender` ENUM('male', 'female') NOT NULL,
- * `BirthDate` DATE NOT NULL,
- * `VipLevel` TINYINT UNSIGNED DEFAULT 0 NOT NULL,
- * `VipEffectiveDate` DATETIME DEFAULT NULL,
- * `VipExpiryDate` DATETIME DEFAULT NULL,
- * `VipFreeUses` INT DEFAULT 0 NOT NULL,
- * `Avatar` BLOB DEFAULT NULL,
- * `CreatedDate` DATETIME DEFAULT CURRENT_TIMESTAMP,
- * `UpdatedDate` DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
- * `AccountStatus` ENUM('active', 'suspended', 'deleted') DEFAULT 'active' NOT NULL
- * );
+/*
+ CREATE TABLE `User` (
+ `UserId` VARCHAR(50) PRIMARY KEY,
+ `NickName` VARCHAR(50) NOT NULL,
+ `PhoneNumber` VARCHAR(20) UNIQUE,
+ `Gender` ENUM('male', 'female') NOT NULL,
+ `BirthDate` DATE NOT NULL,
+ `VipLevel` TINYINT UNSIGNED DEFAULT 0 NOT NULL,
+ `VipEffectiveDate` DATETIME DEFAULT NULL,
+ `VipExpiryDate` DATETIME DEFAULT NULL,
+ `VipFreeUses` INT DEFAULT 0 NOT NULL,
+ `Avatar` BLOB DEFAULT NULL,
+ `CreatedDate` DATETIME DEFAULT CURRENT_TIMESTAMP,
+ `UpdatedDate` DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+ `AccountStatus` ENUM('active', 'suspended', 'deleted') DEFAULT 'active' NOT NULL
+ );
  */
 @Entity(name = "user_entity")
 @Table(name = "User")
@@ -146,7 +145,13 @@ public class User {
         return this;
     }
 
-    public void setBirthday(LocalDateTime birthday) {
+    public User setBirthday(LocalDateTime birthday) {
         this.birthday = birthday;
+        return this;
+    }
+    public User setBirthday(String birthday) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        this.birthday = LocalDateTime.parse(birthday, formatter);
+        return this;
     }
 }

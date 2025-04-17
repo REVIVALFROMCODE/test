@@ -25,6 +25,8 @@ CREATE TABLE `Levels`(
 CREATE TABLE `Profiles`(
                            `UserId` INT PRIMARY KEY,
                            `Name` VARCHAR(50) NOT NULL,
+                           `Title` VARCHAR(50) NOT NULL,
+                           `Label` VARCHAR(50) NOT NULL,
                            `Gender` ENUM('male', 'female') NOT NULL,
                            `BirthDate` DATE NOT NULL
 );
@@ -64,12 +66,16 @@ VALUES (
 INSERT INTO Profiles (
     UserId,
     Name,
+    Title,
+    Label,
     Gender,
     BirthDate
 )
 VALUES (
            '084y_69bGhbvBmHgjH5dHVzac5jadyz95zYC50SQQ25pqk7',
-           'johndoe',
+           'johndoes father',
+            'family',
+           'parent',
            'male',
            '2025-12-31 23:59:59'
        );

@@ -1,7 +1,8 @@
 package com.yingjia.api.controller;
 
+import com.yingjia.api.entity.Profiles;
 import com.yingjia.api.entity.User;
-import com.yingjia.api.response.LoginResponse;
+import com.yingjia.api.request.RelationRequest;
 import com.yingjia.api.service.HttpService;
 import com.yingjia.api.service.PersistentService;
 import com.yingjia.api.service.UserService;
@@ -17,8 +18,8 @@ import java.util.Enumeration;
 import java.util.Optional;
 
 @Controller
-@RequestMapping(path="/wx/auth")
-public class wxController {
+@RequestMapping(path="/wx/user")
+public class userController {
 
     private PersistentService p;
     private HttpService h;
@@ -31,13 +32,6 @@ public class wxController {
         this.u = userService;
     }
 
-    @PostMapping("/login-by-weixin")
-    public ResponseEntity<?> login(@RequestBody String code) {
-        //String response = h.login(code);
-        //return response == null? h.errorLogin(): response;
-        String token = u.login(code);
-        return ResponseEntity.ok(new LoginResponse(token));
-    }
     @PostMapping("/add")
     public @ResponseBody int add(@RequestParam String userId,
                                  @RequestParam String userName,
@@ -45,6 +39,31 @@ public class wxController {
         User user = new User(userId);
         user.setUserName(userName).setSex(sex);
         return p.saveUser(user);
+    }
+
+    @PostMapping("/save")
+    public @ResponseBody int saveProfile(@RequestBody RelationRequest request) {
+        /*
+        TODO: 1..Save profile to ``Profiles`` table
+         */
+
+        Profiles profile = new Profiles(request.getPid());
+        profile.setUserName(request.getName())
+                .setLabel(request.getLabel())
+                .setTitle(request.getTitle())
+                .setGender(request.getGender())
+                .setBirthday(request.getBirthday());
+        return p.saveProfile(profile);
+    }
+
+    @GetMapping("/relationship")
+    public @ResponseBody Profiles getProfiles(@RequestBody RelationRequest request) {
+        /*
+        TODO: 1..List profiles from ``Profiles`` table via request.pid.
+         */
+        Optional<Profiles> opt= p.getProfile(request.getPid());
+
+        return opt.orElse(new Profiles("NULL"));
     }
 
 

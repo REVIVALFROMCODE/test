@@ -3,8 +3,10 @@ services:
     image: 'app'
     depends_on:
       - mysql
+    volumes:
+      - ./dreamgiven.cn.jks:/etc/dreamgiven.cn.jks
     ports:
-      - "8080:8080"
+      - "443:443"
     networks:
       my-network:
         ipv4_address: 172.18.0.3
