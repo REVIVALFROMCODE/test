@@ -6,8 +6,6 @@ import com.yingjia.api.service.HttpService;
 import com.yingjia.api.service.PersistentService;
 import com.yingjia.api.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,7 +17,7 @@ import java.util.Enumeration;
 import java.util.Optional;
 
 @Controller
-@RequestMapping(path="/wx")
+@RequestMapping(path="/wx/auth")
 public class wxController {
 
     private PersistentService p;
@@ -33,7 +31,7 @@ public class wxController {
         this.u = userService;
     }
 
-    @PostMapping("/login-by-wx")
+    @PostMapping("/login-by-weixin")
     public ResponseEntity<?> login(@RequestBody String code) {
         //String response = h.login(code);
         //return response == null? h.errorLogin(): response;
@@ -48,6 +46,7 @@ public class wxController {
         user.setUserName(userName).setSex(sex);
         return p.saveUser(user);
     }
+
 
     @GetMapping(path="/all")
     public @ResponseBody Iterable<User> getAllUsers() {
